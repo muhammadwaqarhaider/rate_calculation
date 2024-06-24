@@ -1,10 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:share/share.dart';
+import 'package:get/get.dart';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:rate_caculation/home/calculation.dart';
+import 'package:share/share.dart';
+
+import 'percentage_app.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,6 +48,8 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
+
   final rateText = TextEditingController();
   final tonnText = TextEditingController();
   final mandText = TextEditingController();
@@ -83,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       key: _key,
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.menu),
+          //leading: Icon(Icons.menu),
           centerTitle: true,
           title: Text("Rate Calculation",style: TextStyle(fontWeight: FontWeight.bold),),
           elevation: 0,
@@ -98,6 +104,54 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
+        drawer:Drawer(
+          width: 300,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  const <Widget>[
+                    CircleAvatar(
+                      radius: 40.0,
+                      backgroundImage: AssetImage("assets/images/rao.jpg"),
+                    ),
+                    SizedBox(height: 10.0),
+                    Text(
+                      'Muhammad Waqar',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'raowaqar2622@gmail.com',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.pageview,size: 30,),
+                title: Text('Percentage App',style: TextStyle(fontWeight: FontWeight.bold),),
+                onTap: () {
+                  Get.to(Percentage());
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.pageview,size: 30,),
+                title: Text('Calculation App',style: TextStyle(fontWeight: FontWeight.bold),),
+                onTap: () {
+                  Get.to(Calculation());
+                },
+              ),
+            ],
+          ),
+        ),
+
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -108,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text("Rate ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     SizedBox(width: 2,),
-                    Text(fillraet),
+                    Text(fillraet,style: TextStyle(color: Colors.black),),
                     Spacer(),
                     Text("Total Amount",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     SizedBox(width: 30,),
@@ -163,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text("Wheat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     SizedBox(width: 10,),
-                    Text(fillWheat),
+                    Text(fillWheat,style: TextStyle(color: Colors.black)),
                   ],
                 ),
                 SizedBox(height: 10,),
@@ -261,9 +315,9 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text("Kat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     SizedBox(width: 10,),
-                    Text(fillkat),
+                    Text(fillkat,style: TextStyle(color: Colors.black)),
                     Spacer(),
-                    Text(fillperWheat),
+                    Text(fillperWheat,style: TextStyle(color: Colors.black)),
                     SizedBox(width: 15,),
 
                   ],
@@ -331,7 +385,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 10,),
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
+                  children: const [
                     Text("Total Wheat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     Spacer(),
                     Text("Total Kat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
@@ -371,7 +425,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: ()  {
                         setState(() {});
                         if(userrate==""){
-                          fillraet="Please Enter Raet!";
+                          fillraet="Please Enter Rate!";
                         }
                         else if(tonn=="" && mand=="" && kg==""){
                           fillraet="";
@@ -446,6 +500,10 @@ class _HomePageState extends State<HomePage> {
                           totalwheat="";
                           totalkat="";
                           _message="";
+                          fillraet="";
+                          fillWheat="";
+                          fillperWheat="";
+                          fillkat="";
                         });
 
                       },

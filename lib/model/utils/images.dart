@@ -7,5 +7,8 @@ class Images {
   static const String bot5  = 'assets/images/bot5.png';
   static const String bot6  = 'assets/images/bot6.png';
   static const String calcu2  = 'assets/images/calcu2.png';
+  static const String earth  = 'assets/images/earth.jpg';
+  static const String Rao  = 'assets/images/bot6.jpg';
+
 
 }
