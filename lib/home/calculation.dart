@@ -1,23 +1,24 @@
+import 'dart:typed_data';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'dart:ui' as ui;
-import 'dart:typed_data';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:rate_caculation/home/calculation.dart';
+import 'dart:ui' as ui;
+
 import 'package:share/share.dart';
 
-import 'percentage_app.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Calculation extends StatefulWidget {
+  const Calculation({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Calculation> createState() => _CalculationState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CalculationState extends State<Calculation> {
 
   // This key is used for the RepaintBoundary widget
   final GlobalKey _key = GlobalKey();
@@ -48,59 +49,41 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
-
-
   final rateText = TextEditingController();
-  final tonnText = TextEditingController();
-  final mandText = TextEditingController();
-  final kgText = TextEditingController();
-  final katText = TextEditingController();
-  final perkatText = TextEditingController();
+  final ghantyText = TextEditingController();
+  final mintText = TextEditingController();
   void clearText() {
     rateText.clear();
-    tonnText.clear();
-    mandText.clear();
-    kgText.clear();
-    katText.clear();
-    perkatText.clear();
+    ghantyText.clear();
+    mintText.clear();
   }
-  //userraet
-  String userrate="";
-  //wheat
-  String tonn="";
-  String mand="";
-  String kg="";
-  //Kat
-  String kat="";
-  String perwheat="";
-  //Given
-  String totalwheat="";
-  String totalkat="";
-  String totalamount="";
-  //Show eror
-  String fillraet="";
-  String fillWheat="";
-  String fillperWheat="";
-  String fillkat="";
 
+  String userrate="";
+  //time
+  String ghanty="";
+  String mint="";
+  // Given
+  String totalamount="";
+  //eror
+  String fillraet="";
+  String filltime="";
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       key: _key,
       child: Scaffold(
         appBar: AppBar(
-          //leading: Icon(Icons.menu),
           centerTitle: true,
           title: Text("Rate Calculation",style: TextStyle(fontWeight: FontWeight.bold),),
           elevation: 0,
           actions: [
             Padding(padding: EdgeInsets.all(10),
-             child: IconButton(
-              icon: Icon(Icons.share_outlined),
-              onPressed: (){
-                Share.share("Email:raowaqar2622@gmail.com\nContact No:03085287503",);
-              },
-            ),
+              child: IconButton(
+                icon: Icon(Icons.share_outlined),
+                onPressed: (){
+                  Share.share('raowaqar2622@gmail.com');
+                },
+              ),
             )
           ],
         ),
@@ -145,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                 leading: Icon(Icons.pageview,size: 30,),
                 title: Text('Calculation App',style: TextStyle(fontWeight: FontWeight.bold),),
                 onTap: () {
-                  Get.to(Calculation());
+                  Get.to(HomePage());
                 },
               ),
             ],
@@ -153,14 +136,47 @@ class _HomePageState extends State<HomePage> {
         ),
 
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             child: Column(
               children: [
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       height: 40,
+                //       width: 250,
+                //       child: TextField(
+                //         //controller: rateText,
+                //         decoration: InputDecoration(
+                //           //hintText: "Add Name",
+                //             label: Text("Name",style: TextStyle(color: Colors.black),),
+                //             border: OutlineInputBorder(
+                //               // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
+                //                 borderRadius: BorderRadius.circular(10)
+                //             ),
+                //             enabledBorder: OutlineInputBorder(
+                //               borderRadius: BorderRadius.circular(10),
+                //               // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
+                //               borderSide: BorderSide(color: Colors.black),
+                //             ),
+                //             focusedBorder: OutlineInputBorder(
+                //                 borderRadius: BorderRadius.circular(10),
+                //                 // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
+                //                 borderSide: BorderSide(color: Colors.black)
+                //             )
+                //         ),
+                //         keyboardType: TextInputType.name,
+                //         cursorColor: Colors.black,
+                //         onChanged: (val){userrate=val;},
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // SizedBox(height: 10,),
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("Rate ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                    Text("Rate",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                     SizedBox(width: 2,),
                     Text(fillraet,style: TextStyle(color: Colors.black),),
                     Spacer(),
@@ -213,126 +229,26 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 SizedBox(height: 10,),
-                Row(
-                  children: [
-                    Text("Wheat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                    SizedBox(width: 10,),
-                    Text(fillWheat,style: TextStyle(color: Colors.black)),
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 165,
-                      child: TextField(
-                        controller: tonnText,
-                        decoration: InputDecoration(
-                          //hintText: "Add Name",
-                            label: Text("Ton",style: TextStyle(color: Colors.black),),
-                            border: OutlineInputBorder(
-                              // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                                borderSide: BorderSide(color: Colors.black)
-                            )
-                        ),
-                        keyboardType: TextInputType.number,
-                        cursorColor: Colors.black,
-                        onChanged: (val){tonn=val;},
-                      ),
-                    ),
-                    Container(
-                      height: 40,
-                      width: 165,
-                      child: TextField(
-                        controller: mandText,
-                        decoration: InputDecoration(
-                          //hintText: "Add Name",
-                            label: Text("Man",style: TextStyle(color: Colors.black),),
-                            border: OutlineInputBorder(
-                              // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                                borderSide: BorderSide(color: Colors.black)
-                            )
-                        ),
-                        keyboardType: TextInputType.number,
-                        cursorColor: Colors.black,
-                        onChanged: (val){mand=val;},
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Container(
-                  height: 40,
-                  width: 165,
-                  child: TextField(
-                    controller: kgText,
-                    decoration: InputDecoration(
-                      //hintText: "Add Name",
-                        label: Text("Kg",style: TextStyle(color: Colors.black),),
-                        border: OutlineInputBorder(
-                          // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
-                            borderSide: BorderSide(color: Colors.black)
-                        )
-                    ),
-                    keyboardType: TextInputType.number,
-                    cursorColor: Colors.black,
-                    onChanged: (val){kg=val;},
-                  ),
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  children: [
-                    Text("Kat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                    SizedBox(width: 10,),
-                    Text(fillkat,style: TextStyle(color: Colors.black)),
-                    Spacer(),
-                    Text(fillperWheat,style: TextStyle(color: Colors.black)),
-                    SizedBox(width: 15,),
 
+                Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Time",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                    SizedBox(width: 2,),
+                    Text(filltime,style: TextStyle(color: Colors.black),),
                   ],
                 ),
                 SizedBox(height: 10,),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       height: 40,
                       width: 165,
                       child: TextField(
-                        controller: katText,
+                        controller: ghantyText,
                         decoration: InputDecoration(
                           //hintText: "Add Name",
-                            label: Text("Kat",style: TextStyle(color: Colors.black),),
+                            label: Text("Ghanty",style: TextStyle(color: Colors.black),),
                             border: OutlineInputBorder(
                               // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
                                 borderRadius: BorderRadius.circular(10)
@@ -350,17 +266,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                         keyboardType: TextInputType.number,
                         cursorColor: Colors.black,
-                        onChanged: (val){kat=val;},
+                        onChanged: (val){ghanty=val;},
                       ),
                     ),
                     Container(
                       height: 40,
                       width: 165,
                       child: TextField(
-                        controller: perkatText,
+                        controller: mintText,
                         decoration: InputDecoration(
                           //hintText: "Add Name",
-                            label: Text("Per Wheat",style: TextStyle(color: Colors.black),),
+                            label: Text("Mint",style: TextStyle(color: Colors.black),),
                             border: OutlineInputBorder(
                               // borderRadius: BorderRadius.only(topRight: Radius.circular(5),topLeft: Radius.circular(40),bottomLeft: Radius.circular(10),bottomRight: Radius.circular(40)),
                                 borderRadius: BorderRadius.circular(10)
@@ -378,46 +294,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                         keyboardType: TextInputType.number,
                         cursorColor: Colors.black,
-                        onChanged: (val){perwheat=val;},
+                        onChanged: (val){mint=val;},
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Text("Total Wheat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                    Spacer(),
-                    Text("Total Kat",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                    SizedBox(width: 80,),
-                  ],
-                ),
-                SizedBox(height: 10,),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                        height: 40,
-                        width: 165,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 0.8,color: Colors.black,style: BorderStyle.solid),
-                        ),
-                        child: Text(totalwheat,style: TextStyle(fontSize: 20),)),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                        height: 40,
-                        width: 165,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 0.8,color: Colors.black,style: BorderStyle.solid),
-                        ),
-                        child: Text(totalkat,style: TextStyle(fontSize: 20),)),
-                  ],
-                ),
-                SizedBox(height: 40,),
+                SizedBox(height: 350,),
                 Row(mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Spacer(),
@@ -427,46 +309,26 @@ class _HomePageState extends State<HomePage> {
                         if(userrate==""){
                           fillraet="Please Enter Rate!";
                         }
-                        else if(tonn=="" && mand=="" && kg==""){
+                        else if(ghanty=="" && mint==""){
                           fillraet="";
-                          fillWheat="Please Enter Wheat!";
-                        }else if(kat==""){
-                          fillWheat="";
-                          fillkat="Please Enter Kat!";
-
-                        }else if(perwheat==""){
-                          setState(() {});
-                          fillperWheat="Please Inter PerWheat!";
-                          fillkat="";
+                          filltime="Please Enter Time!";
                         }else {
                           setState(() {});
                           fillraet="";
-                          fillWheat="";
-                          fillkat="";
-                          fillperWheat="";
+                          filltime="";
 
-                          int itonn=int.tryParse(tonn)??0;
-                          int imand=int.tryParse(mand)??0;
-                          int ikg=int.tryParse(kg)??0;
-                          double ikat=double.parse(kat);
-                          int iperwheat=int.parse(perwheat);
+                          int ighanty=int.tryParse(ghanty)??0;
+                          int imint=int.tryParse(mint)??0;
                           int iuserraet=int.parse(userrate);
 
-                          int convertonn=itonn*1000;
-                          int convertmand=imand*40;
-                          int convertkg=ikg;
+                          int converghanty=ighanty*60;
+                          //int convertmint=imint;
 
-                          int convertinkg=convertonn+convertmand+convertkg;
-                          double result=convertinkg/iperwheat;
-                          double per=result*ikat;
-                          double perfct=convertinkg-per;
-                          totalwheat="${(perfct/40).floor()} mn ${(perfct%40).toInt()} Kg";
-                          totalkat="${(per/40).floor()} mn ${(per%40).toInt()} kg";
-
-                          double kol=iuserraet/40*perfct;
-                          totalamount=kol.round().toString();
-
-                      }
+                          int convertintime=converghanty+imint;
+                          var result=iuserraet/60;
+                          var finelresult=result*convertintime;
+                          totalamount=finelresult.floor().toString();
+                        }
                       },
                       child: Container(
                         height: 40,
@@ -491,19 +353,12 @@ class _HomePageState extends State<HomePage> {
                       onTap: (){
                         setState(() {
                           rateText.clear();
-                          tonnText.clear();
-                          mandText.clear();
-                          kgText.clear();
-                          katText.clear();
-                          perkatText.clear();
+                          ghantyText.clear();
+                          mintText.clear();
                           totalamount="";
-                          totalwheat="";
-                          totalkat="";
                           _message="";
                           fillraet="";
-                          fillWheat="";
-                          fillperWheat="";
-                          fillkat="";
+                          filltime="";
                         });
 
                       },
@@ -521,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 100,),
+                SizedBox(height: 30,),
                 ElevatedButton(
                     onPressed: _takeScreenshot,
                     child: const Text('Take Screenshot')),

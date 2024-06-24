@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "164130579347",
+    "project_id": "login-design-ce227",
+    "storage_bucket": "login-design-ce227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164130579347:android:54e93884cdaf2ce3ef3e66",
+        "android_client_info": {
+          "package_name": "com.rao.login_design"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164130579347-ro97boelknj9fmp0hmfnjt3kjqpoh326.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2Ac6wKZf_56_39mggAieALxN66RvauGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164130579347-ro97boelknj9fmp0hmfnjt3kjqpoh326.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
